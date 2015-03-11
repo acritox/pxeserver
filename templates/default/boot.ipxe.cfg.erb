@@ -1,0 +1,19 @@
+#!ipxe
+ 
+# NFS server
+# Must be specified as IP, as some distros don't do proper name resolution
+set nfs-server <%= node["ipaddress"] %>
+set nfs-root <%= node["tftp"]["directory"] %>/
+ 
+# Base URL used to resolve most other resources
+# Should always end with a slash
+set boot-url http://<%= node["ipaddress"] %>:<%= node["pxeserver"]["httpdport"] %>/
+ 
+# Relative directory to boot.ipxe used to
+# override boot script for specific clients
+set boot-dir boot/
+ 
+# REQUIRED: Absolute URL to the menu script, used by boot.ipxe
+# and commonly used at the end of simple override scripts
+# in ${boot-dir}.
+set menu-url ${boot-url}menu.ipxe

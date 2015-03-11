@@ -1,0 +1,17 @@
+ui menu.c32
+default live
+prompt 0
+timeout 300
+
+menu title PXE boot menu
+menu autoboot Starting Local System in # seconds
+
+label local
+  menu label Boot local hard drive
+  localboot 0
+
+label live
+  menu label ^Install Minimal CentOS 6.5 x86_64
+  kernel centos/x86_64/vmlinuz
+  append initrd=centos/x86_64/initrd.img ks=http://<%= @config %>:<%= @port %>/ks/Centos6-5.minimal.ks
+
